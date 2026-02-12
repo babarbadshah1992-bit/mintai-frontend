@@ -1,0 +1,150 @@
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+ background:#f5f7f6;
+}
+
+/* NAVBAR */
+.navbar{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:15px 30px;
+ background:#1e7c54;
+ color:#fff;
+}
+
+.logo{
+ font-size:22px;
+ font-weight:bold;
+}
+
+.searchBox input{
+ padding:10px;
+ width:250px;
+ border:none;
+ border-radius:5px;
+}
+
+.searchBox button{
+ padding:10px 18px;
+ border:none;
+ background:#f4a940;
+ color:#fff;
+ border-radius:5px;
+ margin-left:8px;
+ cursor:pointer;
+}
+
+/* HERO */
+.hero{
+ text-align:center;
+ padding:70px 20px;
+}
+
+.hero h1{
+ font-size:38px;
+ color:#1e7c54;
+ margin-bottom:10px;
+}
+
+.hero p{
+ color:#555;
+ margin-bottom:35px;
+}
+
+/* CATEGORY BUTTONS */
+.category button{
+ padding:12px 22px;
+ margin:10px;
+ border:none;
+ background:#1e7c54;
+ color:white;
+ border-radius:25px;
+ cursor:pointer;
+}
+
+/* CHAT BOX */
+.chat{
+ margin-top:40px;
+}
+
+.chatBox{
+ width:90%;
+ max-width:600px;
+ height:220px;
+ margin:auto;
+ background:white;
+ border-radius:10px;
+ padding:15px;
+ overflow-y:auto;
+ box-shadow:0 0 10px rgba(0,0,0,0.1);
+ text-align:left;
+}
+
+.chat input{
+ width:70%;
+ padding:12px;
+ margin-top:10px;
+ border-radius:6px;
+ border:1px solid #ccc;
+}
+
+.chat button{
+ padding:12px 25px;
+ background:#f4a940;
+ color:white;
+ border:none;
+ border-radius:6px;
+ cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+ text-align:center;
+ padding:25px;
+ margin-top:60px;
+ background:#1e7c54;
+ color:white;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+ .searchBox input{width:150px;}
+ .hero h1{font-size:26px;}
+ .chat input{width:100%;margin-bottom:10px;}
+}
+.ai-products{
+  border-top:1px solid #eee;
+  padding:12px;
+}
+
+.ai-products h3{
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.product-card{
+  background:#f7f7f7;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:8px;
+  font-size:14px;
+}
+/* ===== AI TYPING ANIMATION ===== */
+.typing{
+  color:#888;
+  font-style:italic;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink{
+  0%{opacity:0.2}
+  50%{opacity:1}
+  100%{opacity:0.2}
+}
