@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Health Report Scanner</title>
+<style>
+body{
+  font-family:sans-serif;
+  background:#f6f6f6;
+  text-align:center;
+  padding:40px;
+}
+.box{
+  background:#fff;
+  padding:40px;
+  border-radius:12px;
+  max-width:400px;
+  margin:auto;
+}
+button{
+  background:#ff8c2b;
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  border-radius:8px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>📄 Health Report Scanner</h2>
+<p>You get 5 free scans</p>
+
+<input type="file"><br><br>
+<button onclick="scanReport()">Scan Report</button>
+
+<p id="msg"></p>
+</div>
+
+<script>
+
+function scanReport(){
+
+  let scanCount = Number(localtorage.getItem("reportScanCount")) || 0;
+
+  if(scanCount >= 5){
+   window.location.href = "pricing.html";
+   return;
+}
+
+  scanCount++;
+
+  localStorage.setItem("reportScanCount", scanCount);
+
+  document.getElementById("msg").innerHTML =
+    "✅ Report scanned successfully. Remaining scans: " + (5 - scanCount);
+}
+
+</script>
+
+</body>
+</html>
