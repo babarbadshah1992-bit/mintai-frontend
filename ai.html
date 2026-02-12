@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MintAI Assistant</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{background:#f4f9f6}
+
+nav{
+background:#1b4332;color:#fff;
+padding:15px 8%;display:flex;justify-content:space-between;
+}
+
+.chatbox{
+max-width:700px;
+margin:40px auto;
+background:#fff;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+padding:25px;
+}
+
+#messages{height:350px;overflow:auto;margin-bottom:20px}
+
+.msg{margin:10px 0}
+.user{color:#1b4332;font-weight:600}
+.bot{color:#333}
+
+input{
+width:75%;padding:12px;border-radius:20px;border:1px solid #ccc
+}
+button{
+padding:12px 20px;border:none;border-radius:20px;
+background:#ff9f1c;color:#fff;margin-left:10px
+}
+
+.upgrade{
+display:none;
+background:#ffe8cc;
+padding:20px;border-radius:15px;text-align:center;margin-top:15px
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>🤖 MintAI Assistant</h2>
+<a href="index.html" style="color:white">Home</a>
+</nav>
+
+<div class="chatbox">
+<div id="messages"></div>
+
+<input id="input" placeholder="Ask about skin, hair, weight loss...">
+<button onclick="sendMsg()">Send</button>
+
+
+</div>
+
+<script>
+
+
+function addMsg(text,cls){
+document.getElementById("messages").innerHTML +=
+`<div class="msg ${cls}">${text}</div>`;
+}
+
+async function sendMsg(){
+let input = document.getElementById("input").value;
+if(!input) return;
+
+addMsg("You: " + input,"user");
+document.getElementById("input").value="";
+
+const res = await fetch("https://mintai-backend.vercel.app/api/chat",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body: JSON.stringify({message:input})
+});
+
+const data = await res.json();
+addMsg("MintAI: " + data.reply,"bot");
+}
+
+</script>
+
+</body>
+</html>
