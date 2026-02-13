@@ -1,3 +1,41 @@
+// 🛍 Affiliate product database
+const productsDB = {
+
+  hair: [
+    {
+      name: "Biotin Hair Gummies",
+      desc: "Hair growth supplement",
+      link: "https://amzn.to/biotin"
+    },
+    {
+      name: "Onion Hair Oil",
+      desc: "Stops hair fall fast",
+      link: "https://amzn.to/oniono"
+    }
+  ],
+
+  skin: [
+    {
+      name: "Vitamin C Serum",
+      desc: "Skin brightening serum",
+      link: "https://amzn.to/vitaminc"
+    },
+    {
+      name: "Sunscreen SPF50",
+      desc: "Protect from tanning",
+      link: "https://amzn.to/sunscreen"
+    }
+  ],
+
+  weight: [
+    {
+      name: "Green Tea Fat Burner",
+      desc: "Boost metabolism",
+      link: "https://amzn.to/greentea"
+    }
+  ]
+
+};
 document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.includes("ask")) {
         const limitBox = document.querySelector(".limit-box");
@@ -61,13 +99,38 @@ async function sendMessage() {
   // remove typing
   document.getElementById("typing").remove();
 
-  // show AI reply
-  typeWriter(reply);
+ // show AI reply
+typeWriter(reply);
 
-  // show products
-  showProducts(msg);
+// 🔥 AUTO PRODUCT MATCHING
+const msgLower = msg.toLowerCase();
+
+// HAIR keywords
+if (
+  msgLower.includes("hair") ||
+  msgLower.includes("hairfall") ||
+  msgLower.includes("hair loss")
+) {
+  showProducts("hair");
 }
 
+// SKIN keywords
+if (
+  msgLower.includes("skin") ||
+  msgLower.includes("pimple") ||
+  msgLower.includes("acne")
+) {
+  showProducts("skin");
+}
+
+// WEIGHT keywords
+if (
+  msgLower.includes("weight") ||
+  msgLower.includes("fat") ||
+  msgLower.includes("belly")
+) {
+  showProducts("weight");
+}
 function askPreset(text){
  document.getElementById("userInput").value=text;
  sendMessage();
@@ -119,4 +182,23 @@ function typeWriter(text){
   }
 
   typing();
+}
+function showProducts(keyword){
+
+  const chat = document.getElementById("messages");
+
+  if(!productsDB[keyword]) return;
+
+  chat.innerHTML += `<h3>🛍 Recommended Products</h3>`;
+
+  productsDB[keyword].forEach(p => {
+    chat.innerHTML += `
+      <div class="product-card">
+        <h4>${p.name}</h4>
+        <p>${p.desc}</p>
+        <a href="${p.link}" target="_blank">Buy on Amazon</a>
+      </div>
+    `;
+  });
+
 }
