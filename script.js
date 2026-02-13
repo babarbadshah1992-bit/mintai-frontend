@@ -37,7 +37,7 @@ const productsDB = {
 
 };
 document.addEventListener("DOMContentLoaded", function () {
-    if (window.location.pathname.includes("ask")) {
+    if (window.location.pathname.includes("ai")) {
         const limitBox = document.querySelector(".limit-box");
         if (limitBox) {
             limitBox.style.display = "none";
