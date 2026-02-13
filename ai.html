@@ -56,6 +56,11 @@ padding:20px;border-radius:15px;text-align:center;margin-top:15px
 
 <div class="chatbox">
 <div id="messages"></div>
+  <div id="typingIndicator" class="typing hidden">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
 
 <input id="input" placeholder="Ask about skin, hair, weight loss...">
 <button onclick="sendMsg()">Send</button>
@@ -65,27 +70,44 @@ padding:20px;border-radius:15px;text-align:center;margin-top:15px
 
 <script>
 
+async function sendMsg() {
 
-function addMsg(text,cls){
-document.getElementById("messages").innerHTML +=
-`<div class="msg ${cls}">${text}</div>`;
-}
+  const input = document.getElementById("input");
+  const chat = document.getElementById("messages");
+  const msg = input.value;
 
-async function sendMsg(){
-let input = document.getElementById("input").value;
-if(!input) return;
+  if(!msg) return;
 
-addMsg("You: " + input,"user");
-document.getElementById("input").value="";
+  // user message show
+  chat.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+  input.value = "";
 
-const res = await fetch("https://mintai-backend.vercel.app/api/chat",{
-method:"POST",
-headers:{ "Content-Type":"application/json" },
-body: JSON.stringify({message:input})
-});
+  // 🔵 SHOW TYPING DOTS
+  document.getElementById("typingIndicator").classList.remove("hidden");
 
-const data = await res.json();
-addMsg("MintAI: " + data.reply,"bot");
+  try {
+
+    const res = await fetch("https://mintai-backend.vercel.app/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: msg })
+    });
+
+    const data = await res.json();
+
+    // 🔴 HIDE TYPING DOTS
+    document.getElementById("typingIndicator").classList.add("hidden");
+
+    // AI reply show
+    chat.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+    chat.scrollTop = chat.scrollHeight;
+
+  } catch (err) {
+
+    document.getElementById("typingIndicator").classList.add("hidden");
+    chat.innerHTML += `<p>Server error 😢</p>`;
+
+  }
 }
 
 </script>
