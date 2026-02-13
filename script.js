@@ -96,11 +96,11 @@ async function sendMessage() {
 
   const reply = await res.text();
 
-  // remove typing
-  document.getElementById("typing").remove();
+ // remove typing dots
+document.getElementById("typing").remove();
 
- // show AI reply
-typeWriter(reply);
+// show AI reply instantly
+addMsg(reply,"MintAI");
 
 // 🔥 AUTO PRODUCT MATCHING
 const msgLower = msg.toLowerCase();
