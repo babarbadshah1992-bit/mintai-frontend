@@ -1,3 +1,6 @@
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
 const API_URL = "https://mintai-backend.vercel.app/api/chat";
 
 async function sendMessage(){
