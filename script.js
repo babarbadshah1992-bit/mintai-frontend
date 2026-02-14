@@ -1,204 +1,113 @@
-// 🛍 Affiliate product database
+// 🔗 YOUR BACKEND API (VERCEL)
+const API_URL = "https://mintai-backend.vercel.app/api/chat";
+
+
+// 🛍️ Affiliate Product Database
 const productsDB = {
-
   hair: [
-    {
-      name: "Biotin Hair Gummies",
-      desc: "Hair growth supplement",
-      link: "https://amzn.to/biotin"
-    },
-    {
-      name: "Onion Hair Oil",
-      desc: "Stops hair fall fast",
-      link: "https://amzn.to/oniono"
-    }
-  ],
-
-  skin: [
-    {
-      name: "Vitamin C Serum",
-      desc: "Skin brightening serum",
-      link: "https://amzn.to/vitaminc"
-    },
-    {
-      name: "Sunscreen SPF50",
-      desc: "Protect from tanning",
-      link: "https://amzn.to/sunscreen"
-    }
-  ],
-
-  weight: [
-    {
-      name: "Green Tea Fat Burner",
-      desc: "Boost metabolism",
-      link: "https://amzn.to/greentea"
-    }
-  ]
-
-};
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.location.pathname.includes("ai")) {
-        const limitBox = document.querySelector(".limit-box");
-        if (limitBox) {
-            limitBox.style.display = "none";
-        }
-    }
-});
-
-const API_URL="https://mintai-backend.vercel.app/api/chat";
-/* PRODUCT DATABASE */
-const productsDB = {
-  lips: [
-    {name:"Mamaearth Lip Balm", link:"#"},
-    {name:"Biotique Lip Balm", link:"#"}
-  ],
-  hair: [
-    {name:"WOW Onion Oil", link:"#"},
-    {name:"Mamaearth Hair Oil", link:"#"}
+    { name:"WOW Onion Hair Oil", link:"https://amzn.to/3HairOil" },
+    { name:"Mamaearth Hair Fall Shampoo", link:"https://amzn.to/3Shampoo" }
   ],
   skin: [
-    {name:"Cetaphil Cleanser", link:"#"},
-    {name:"Mamaearth Face Wash", link:"#"}
+    { name:"Vitamin C Serum", link:"https://amzn.to/3Serum" },
+    { name:"Sunscreen SPF50", link:"https://amzn.to/3Sunscreen" }
   ],
   weight: [
-    {name:"Himalaya Fat Burner", link:"#"},
-    {name:"Green Tea", link:"#"}
+    { name:"Green Tea Fat Burner", link:"https://amzn.to/3Greentea" },
+    { name:"Apple Cider Vinegar", link:"https://amzn.to/3ACV" }
   ]
 };
 
-function addMsg(text,who){
- document.getElementById("chatBox").innerHTML += `<p><b>${who}:</b> ${text}</p>`;
+
+
+// 📩 ADD MESSAGE TO CHAT
+function addMsg(text, who){
+  const box = document.getElementById("messages");
+  box.innerHTML += `<p><b>${who}:</b> ${text}</p>`;
+  box.scrollTop = box.scrollHeight;
 }
 
-async function sendMessage() {
+
+
+// ⏳ TYPING ANIMATION
+function showTyping(){
+  const box = document.getElementById("messages");
+  box.innerHTML += `<p id="typing">🤖 MintAI is thinking...</p>`;
+  box.scrollTop = box.scrollHeight;
+}
+
+function removeTyping(){
+  const typing = document.getElementById("typing");
+  if(typing) typing.remove();
+}
+
+
+
+// 🛍️ SHOW PRODUCTS
+function showProducts(keyword){
+  if(!productsDB[keyword]) return;
+
+  const chat = document.getElementById("messages");
+  chat.innerHTML += `<h3>🛍️ Recommended Products</h3>`;
+
+  productsDB[keyword].forEach(p=>{
+    chat.innerHTML += `
+      <div class="product-card">
+        <h4>${p.name}</h4>
+        <a href="${p.link}" target="_blank">Buy on Amazon</a>
+      </div>
+    `;
+  });
+}
+
+
+
+// 🚀 MAIN SEND MESSAGE FUNCTION
+async function sendMessage(){
 
   const input = document.getElementById("userInput");
   const msg = input.value.trim();
   if(!msg) return;
 
-  // show user message
+  // user msg
   addMsg(msg,"You");
-  input.value = "";
+  input.value="";
 
-  // show typing animation
-  const chatBox = document.getElementById("chatBox");
-  chatBox.innerHTML += `<p id="typing" class="typing"><b>MintAI:</b> thinking...</p>`;
+  // typing animation
+  showTyping();
 
-  // wait 1.5 sec (real feel)
-  await new Promise(r => setTimeout(r,1500));
+  try{
+    // call backend
+    const res = await fetch(API_URL,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ message: msg })
+    });
 
-  // call backend
-  const res = await fetch(API_URL,{
-    method:"POST",
-    headers:{ "Content-Type":"application/json"},
-    body: JSON.stringify(msg)
-  });
+    const data = await res.json();
 
-  const reply = await res.text();
+    removeTyping();
 
- // remove typing dots
-document.getElementById("typing").remove();
+    // AI reply
+    addMsg(data.reply,"MintAI");
 
-// show AI reply instantly
-addMsg(reply,"MintAI");
+    // 🔥 AUTO PRODUCT MATCHING
+    const m = msg.toLowerCase();
 
-// 🔥 AUTO PRODUCT MATCHING
-const msgLower = msg.toLowerCase();
-
-// HAIR keywords
-if (
-  msgLower.includes("hair") ||
-  msgLower.includes("hairfall") ||
-  msgLower.includes("hair loss")
-) {
-  showProducts("hair");
-}
-
-// SKIN keywords
-if (
-  msgLower.includes("skin") ||
-  msgLower.includes("pimple") ||
-  msgLower.includes("acne")
-) {
-  showProducts("skin");
-}
-
-// WEIGHT keywords
-if (
-  msgLower.includes("weight") ||
-  msgLower.includes("fat") ||
-  msgLower.includes("belly")
-) {
-  showProducts("weight");
-}
-function askPreset(text){
- document.getElementById("userInput").value=text;
- sendMessage();
-}
-
-function sendPreset(){
- const text=document.getElementById("searchBox").value;
- askPreset(text);
-}
-function showProducts(userText){
-   let list = document.getElementById("productList");
-   list.innerHTML="";
-
-   userText = userText.toLowerCase();
-
-   let category=null;
-
-   if(userText.includes("lip")) category="lips";
-   else if(userText.includes("hair")) category="hair";
-   else if(userText.includes("skin")) category="skin";
-   else if(userText.includes("weight")) category="weight";
-
-   if(!category) return;
-
-   productsDB[category].forEach(p=>{
-      list.innerHTML += `
-        <div class="product-card">
-          <p>${p.name}</p>
-          <button>Buy Now</button>
-        </div>`;
-   });
-}
-/* REAL AI TYPING EFFECT */
-function typeWriter(text){
-  let i = 0;
-  const speed = 20;
-
-  const box = document.getElementById("chatBox");
-  const p = document.createElement("p");
-  p.innerHTML = "<b>MintAI:</b> ";
-  box.appendChild(p);
-
-  function typing(){
-    if(i < text.length){
-      p.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
+    if(m.includes("hair") || m.includes("hair fall") || m.includes("bald")){
+      showProducts("hair");
     }
+
+    if(m.includes("skin") || m.includes("pimple") || m.includes("acne")){
+      showProducts("skin");
+    }
+
+    if(m.includes("weight") || m.includes("fat") || m.includes("belly")){
+      showProducts("weight");
+    }
+
+  }catch(err){
+    removeTyping();
+    addMsg("Server error. Please try again.","MintAI");
   }
-
-  typing();
-}
-function showProducts(keyword){
-
-  const chat = document.getElementById("messages");
-
-  if(!productsDB[keyword]) return;
-
-  chat.innerHTML += `<h3>🛍 Recommended Products</h3>`;
-
-  productsDB[keyword].forEach(p => {
-    chat.innerHTML += `
-      <div class="product-card">
-        <h4>${p.name}</h4>
-        <p>${p.desc}</p>
-        <a href="${p.link}" target="_blank">Buy on Amazon</a>
-      </div>
-    `;
-  });
-
 }
