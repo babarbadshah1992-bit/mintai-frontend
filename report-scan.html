@@ -1,64 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Health Report Scanner</title>
-<style>
-body{
-  font-family:sans-serif;
-  background:#f6f6f6;
-  text-align:center;
-  padding:40px;
-}
-.box{
-  background:#fff;
-  padding:40px;
-  border-radius:12px;
-  max-width:400px;
-  margin:auto;
-}
-button{
-  background:#ff8c2b;
-  color:#fff;
-  border:none;
-  padding:12px 20px;
-  border-radius:8px;
-  cursor:pointer;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Report Scan</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="box">
-<h2>📄 Health Report Scanner</h2>
-<p>You get 5 free scans</p>
+<!-- NAVBAR -->
+<nav>
+  <h2>🌿 MintAI</h2>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="store.html">Store</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="ai.html">AI Assistant</a>
+    <a href="report-scan.html">Report Scan</a>
+  </div>
+</nav>
 
-<input type="file"><br><br>
-<button onclick="scanReport()">Scan Report</button>
+<section class="hero">
+  <h1>📄 Health Report Scanner</h1>
+  <p>Upload Blood Test, MRI, Sugar Report & get AI explanation</p>
+</section>
 
-<p id="msg"></p>
+<div class="upload-box">
+  <h2>Feature Coming Soon 🚀</h2>
+  <p>This feature will be available inside MintAI App.</p>
+  <p>Upload medical reports and get easy AI explanations.</p>
+
+  <br>
+  <a href="pricing.html">
+    <button class="btn btn-main">View Premium Plans</button>
+  </a>
 </div>
-
-<script>
-
-function scanReport(){
-
-  let scanCount = Number(localtorage.getItem("reportScanCount")) || 0;
-
-  if(scanCount >= 5){
-   window.location.href = "pricing.html";
-   return;
-}
-
-  scanCount++;
-
-  localStorage.setItem("reportScanCount", scanCount);
-
-  document.getElementById("msg").innerHTML =
-    "✅ Report scanned successfully. Remaining scans: " + (5 - scanCount);
-}
-
-</script>
 
 </body>
 </html>
