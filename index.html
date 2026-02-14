@@ -4,239 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MintAI – Ayurvedic Beauty & Wellness</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
-body{background:#f6fbf8;color:#1b4332}
-
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 8%;
-background:#1b4332;
-color:#fff;
-position:sticky;top:0
-}
-
-nav h2{font-weight:700}
-nav ul{display:flex;gap:25px;list-style:none}
-nav a{color:#fff;text-decoration:none;font-weight:500}
-
-.hero{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:70px 20px
-}
-
-.hero h1{
-font-size:42px;
-max-width:700px;
-line-height:1.3;
-margin-bottom:15px;
-}
-
-.hero p{color:#555;margin-bottom:30px}
-
-.btn{
-padding:14px 28px;
-border-radius:30px;
-border:none;
-cursor:pointer;
-font-weight:600;
-margin:10px;
-}
-
-.primary{background:#ff9f1c;color:#fff}
-.secondary{background:#1b4332;color:#fff}
-
-.categories{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-padding:50px 8%;
-}
-
-.card{
-background:#fff;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-text-align:center;
-transition:0.3s;
-}
-.card:hover{transform:translateY(-8px)}
-
-footer{
-background:#1b4332;
-color:#fff;
-text-align:center;
-padding:30px;
-margin-top:50px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav>
-<h2>🌿 MintAI</h2>
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Store</a></li>
-<li><a href="#">Blog</a></li>
-<li><a href="#">AI Assistant</a></li>
-<li><a href="#">About</a></li>
-</ul>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">🌿 MintAI</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="ai.html">AI Assistant</a>
+    <a href="store.html">Store</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="report-scan.html">Report Scan</a>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-<h1>AI Powered Ayurvedic Beauty & Wellness</h1>
-<p>Smart recommendations for Skin, Hair, Weight Loss & Natural Supplements — For India & Global Users</p>
+  <h1>AI Powered Ayurvedic Beauty & Wellness</h1>
+  <p>Smart recommendations for Skin, Hair & Weight Loss</p>
 
-<a href="store.html"><button class="btn primary">Explore Store</button></a>
-<a href="ai.html"><button class="btn secondary">Ask MintAI</button></a>
-<a href="report-scan.html"><button class="btn primary">Scan Health Report</button></a>
-</section>
-
-<section class="categories">
-
-<div class="card">
-<h3>Skin Care</h3>
-<p>Natural skincare products & routines</p>
-</div>
-
-<div class="card">
-<h3>Hair Care</h3>
-<p>Hair growth oils, shampoos & remedies</p>
-</div>
-
-<div class="card">
-<h3>Weight Loss</h3>
-<p>Ayurvedic fat burn & detox products</p>
-</div>
-
-<div class="card">
-<h3>Supplements</h3>
-<p>Vitamins, immunity & herbal capsules</p>
-</div>
-
-</section>
-<!-- ================= AI CHAT BUTTON ================= -->
-<style>
-#ai-chat-button{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#10a37f;
-  color:#fff;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  cursor:pointer;
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);
-  z-index:9999;
-}
-#ai-chat-box{
-  position:fixed;
-  bottom:90px;
-  right:20px;
-  width:320px;
-  height:420px;
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.3);
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  z-index:9999;
-}
-#ai-header{
-  background:#10a37f;
-  color:#fff;
-  padding:12px;
-  font-weight:bold;
-}
-#ai-messages{
-  flex:1;
-  padding:10px;
-  overflow-y:auto;
-  font-size:14px;
-}
-#ai-input-area{
-  display:flex;
-  border-top:1px solid #ddd;
-}
-#ai-input{
-  flex:1;
-  padding:10px;
-  border:none;
-  outline:none;
-}
-#ai-send{
-  background:#10a37f;
-  color:#fff;
-  border:none;
-  padding:10px 15px;
-  cursor:pointer;
-}
-.msg-user{color:#333;margin:5px 0;}
-.msg-bot{color:#10a37f;margin:5px 0;}
-</style>
-
-<div id="ai-chat-button">💬</div>
-
-<div id="ai-chat-box">
-  <div id="ai-header">Beauty AI Assistant</div>
-  <div id="ai-messages"></div>
-  <!-- PRODUCTS SECTION -->
-<div id="aiProducts">
-   <h3>Recommended Products</h3>
-   <div id="productList"></div>
-</div>
-  <div id="ai-input-area">
-    <input id="ai-input" placeholder="Ask anything..." />
-    <button id="ai-send">Send</button>
+  <div class="hero-buttons">
+    <a href="ai.html" class="btn primary">Ask MintAI</a>
+    <a href="store.html" class="btn secondary">Explore Store</a>
+    <a href="report-scan.html" class="btn secondary">Scan Health Report</a>
   </div>
-</div>
+</section>
 
-<script>
-const btn=document.getElementById("ai-chat-button");
-const box=document.getElementById("ai-chat-box");
-btn.onclick=()=> box.style.display= box.style.display==="flex"?"none":"flex";
+<!-- CATEGORIES -->
+<section class="categories">
+  <div class="cat">
+    <h3>Skin Care</h3>
+    <p>Natural skincare products & routines</p>
+  </div>
 
-document.getElementById("ai-send").onclick=async ()=>{
-  const input=document.getElementById("ai-input");
-  const msg=input.value;
-  if(!msg) return;
-  
-  const messages=document.getElementById("ai-messages");
-  messages.innerHTML+=`<div class="msg-user"><b>You:</b> ${msg}</div>`;
-  input.value="";
+  <div class="cat">
+    <h3>Hair Care</h3>
+    <p>Hair growth oils, shampoos & solutions</p>
+  </div>
 
-  const res=await fetch("https://mintai-backend.vercel.app/api/chat",{
-    method:"POST",
-    headers:{ "Content-Type":"application/json"},
-    body: JSON.stringify({message:msg})
-  });
+  <div class="cat">
+    <h3>Weight Loss</h3>
+    <p>Ayurvedic fat burn & detox</p>
+  </div>
 
-  const data=await res.json();
-  messages.innerHTML+=`<div class="msg-bot"><b>AI:</b> ${data.reply}</div>`;
-  messages.scrollTop=messages.scrollHeight;
-};
-</script>
-<!-- ================= END AI CHAT BUTTON ================= -->
+  <div class="cat">
+    <h3>Supplements</h3>
+    <p>Vitamins, immunity & herbal care</p>
+  </div>
+</section>
+
+<!-- APP PROMO -->
+<section class="app-box">
+  <h2>📱 MintAI App Coming Soon</h2>
+  <p>Photo Scan • Health Report Scan • Unlimited AI</p>
+  <a href="pricing.html" class="btn primary">View Plans</a>
+</section>
+
 <footer>
-© 2026 MintAI.store — Natural Wellness Guide
+  © 2026 MintAI • Ayurvedic Beauty & Wellness
 </footer>
 
 </body>
