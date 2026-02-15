@@ -1,4 +1,3 @@
-<script src="script.js"></script>
 const API_URL = "https://mintai-backend.vercel.app/api/chat";
 
 async function sendMessage(){
