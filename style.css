@@ -207,3 +207,18 @@ margin:10px 0;
   0%,80%,100%{transform:scale(0);}
   40%{transform:scale(1);}
 }
+
+/* HERO BIG PROFESSIONAL SPACING */
+.hero{
+  padding-top:120px;
+  padding-bottom:120px;
+}
+
+h1{
+  font-size:48px;
+}
+
+p{
+  font-size:18px;
+  color:#555;
+}
