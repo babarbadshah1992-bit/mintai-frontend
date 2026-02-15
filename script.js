@@ -53,3 +53,7 @@ function showProducts(){
         </div>
     `;
 }
+function toggleMenu() {
+  let nav = document.getElementById("navLinks");
+  nav.classList.toggle("active");
+}
