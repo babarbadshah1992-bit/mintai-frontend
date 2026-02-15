@@ -1,32 +1,45 @@
 const API_URL = "https://mintai-backend.vercel.app/api/chat";
 
-async function sendMessage(){
+function sendMessage() {
 
-    let input = document.getElementById("userInput");
-    let chatBox = document.getElementById("chatBox");
-    let typing = document.getElementById("typing");
+  let input = document.getElementById("userInput");
+  let chat = document.getElementById("chatBox");
 
-    let msg = input.value.trim();
-    if(!msg) return;
+  let userText = input.value.trim();
+  if(userText=="") return;
 
-    chatBox.innerHTML += `<div class="user-msg">${msg}</div>`;
-    input.value = "";
+  // USER MESSAGE
+  chat.innerHTML += `
+    <div class="user-msg">${userText}</div>
+  `;
 
-    typing.style.display="block";
+  // TYPING DOTS
+  chat.innerHTML += `
+    <div id="typing" class="typing">
+      <span></span><span></span><span></span>
+    </div>
+  `;
 
-    const res = await fetch(API_URL,{
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({message:msg})
-    });
+  chat.scrollTop = chat.scrollHeight;
+  input.value="";
 
-    const data = await res.json();
+  // AI REPLY DELAY
+  setTimeout(()=>{
 
-    typing.style.display="none";
+    document.getElementById("typing").remove();
 
-    chatBox.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
+    chat.innerHTML += `
+      <div class="bot-msg">
+        It seems like you mentioned "<b>${userText}</b>" 😊<br><br>
+        🌿 Recommended Products:
+        <br><br>
+        <a href="store.html" class="buy-btn">View Products</a>
+      </div>
+    `;
 
-    showProducts();
+    chat.scrollTop = chat.scrollHeight;
+
+  },1500);
 }
 
 function showProducts(){
