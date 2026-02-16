@@ -9,20 +9,20 @@ async function sendMessage() {
   if(msg === "") return;
 
   // user message
-  chat.innerHTML += `<div class="user-msg">${msg}</div>`;
-  input.value="";
-  chat.scrollTo({
-  top: chat.scrollHeight,
-  behavior: "smooth"
-});
+chat.innerHTML += `<div class="user-msg">${msg}</div>`;
+input.value="";
 
-  // typing dots
-  chat.innerHTML += `
-  <div id="typing" class="typing">
-    <span></span><span></span><span></span>
-  </div>`;
-  chat.scrollTop = chat.scrollHeight;
+// scroll only little (NOT bottom)
+setTimeout(()=>{
+  chat.scrollTop = chat.scrollHeight - 50;
+},100);
 
+ // typing dots
+chat.innerHTML += `
+<div id="typing" class="typing">
+<span></span><span></span><span></span>
+</div>`;
+chat.scrollTop = chat.scrollHeight;
   try {
 
     const res = await fetch(API_URL, {
