@@ -4,32 +4,27 @@ async function sendMessage() {
 
   let input = document.getElementById("userInput");
   let chat = document.getElementById("chatBox");
+
   let msg = input.value.trim();
+  if (msg === "") return;
 
-  if(msg === "") return;
+  // USER MESSAGE
+  chat.innerHTML += `<div class="user-msg">${msg}</div>`;
+  input.value="";
 
-  // user message
-chat.innerHTML += `<div class="user-msg">${msg}</div>`;
-input.value="";
+  // typing dots
+  chat.innerHTML += `
+    <div id="typing" class="typing">
+      <span></span><span></span><span></span>
+    </div>
+  `;
 
-// scroll only little (NOT bottom)
-setTimeout(()=>{
-  chat.scrollTop = chat.scrollHeight - 50;
-},100);
+  // 🔥 NO AUTO SCROLL TO BOTTOM NOW
 
- // typing dots
-chat.innerHTML += `
-<div id="typing" class="typing">
-<span></span><span></span><span></span>
-</div>`;
-chat.scrollTop = chat.scrollHeight;
   try {
-
     const res = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type":"application/json"
-      },
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ message: msg })
     });
 
@@ -37,24 +32,24 @@ chat.scrollTop = chat.scrollHeight;
 
     document.getElementById("typing").remove();
 
-   let products = getProductLink(data.reply);
+    let products = getProductLink(data.reply);
 
-chat.innerHTML += `
-<div class="bot-msg">
-${data.reply}
-<br><br>
-🌿 Recommended Products:
-<br>
-${products}
-<br><br>
-<a href="store.html" class="buy-btn">View Products</a>
-</div>`;
+    chat.innerHTML += `
+      <div class="bot-msg">
+        ${data.reply}
+        <br><br>
+        🌿 Recommended Products:<br><br>
+        ${products}
+        <br><br>
+        <a href="store.html" class="buy-btn">View Products</a>
+      </div>
+    `;
 
-});
+  } catch (err) {
 
-  } catch(err){
     document.getElementById("typing").remove();
-    chat.innerHTML += `<div class="bot-msg">Server error 😔</div>`;
+
+    chat.innerHTML += `<div class="bot-msg">Server error 😢</div>`;
   }
 }
 function toggleMenu() {
