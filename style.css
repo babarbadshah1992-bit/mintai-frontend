@@ -294,3 +294,29 @@ margin:10px 0;
     text-align:center;
   }
 }
+/* USER MESSAGE */
+.user-msg{
+    background:#2f6f8f;
+    color:white;
+    padding:10px 14px;
+    border-radius:15px 15px 0 15px;
+    max-width:80%;
+    margin:10px 0 10px auto;
+    display:block;
+}
+
+/* BOT MESSAGE */
+.bot-msg{
+    background:#ececec;
+    padding:12px 14px;
+    border-radius:15px 15px 15px 0;
+    max-width:80%;
+    margin:10px 0;
+    display:block;
+}
+
+/* chat spacing */
+.chat_box{
+    display:flex;
+    flex-direction:column;
+}
