@@ -12,17 +12,9 @@ async function sendMessage() {
   input.value = "";
 
   // Scroll to user message (IMPORTANT)
- setTimeout(()=>{
-  const allUsers = document.querySelectorAll(".user-msg");
-const lastUser = allUsers[allUsers.length - 1];
-
-// ⭐ NEW LINE ADD KARO
+  
 chat.scrollTop = chat.scrollHeight;
 
-lastUser.scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
 },100);
 
   // Typing dots show
