@@ -14,8 +14,15 @@ async function sendMessage() {
   // Scroll to user message (IMPORTANT)
  setTimeout(()=>{
   const allUsers = document.querySelectorAll(".user-msg");
-  const lastUser = allUsers[allUsers.length - 1];
-  lastUser.scrollIntoView({ behavior: "smooth", block: "start" });
+const lastUser = allUsers[allUsers.length - 1];
+
+// ⭐ NEW LINE ADD KARO
+chat.scrollTop = chat.scrollHeight;
+
+lastUser.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 },100);
 
   // Typing dots show
@@ -49,8 +56,14 @@ async function sendMessage() {
     /* Scroll to BOT message (ChatGPT style) */
 setTimeout(() => {
   const allBots = document.querySelectorAll(".bot-msg");
-  const lastBot = allBots[allBots.length - 1];
-  lastBot.scrollIntoView({ behavior: "smooth", block: "start" });
+const lastBot = allBots[allBots.length - 1];
+
+chat.scrollTop = chat.scrollHeight;   // ⭐ ADD THIS
+
+lastBot.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 }, 200);
 
     // ⭐⭐⭐ MAIN MAGIC SCROLL ⭐⭐⭐
