@@ -4,69 +4,54 @@ async function sendMessage() {
 
   const input = document.getElementById("userInput");
   const chat = document.getElementById("chatBox");
+
   let msg = input.value.trim();
   if(msg === "") return;
 
-  // USER MESSAGE
+  // USER MESSAGE ADD
   chat.innerHTML += `<div class="user-msg">${msg}</div>`;
   input.value = "";
 
-  // Scroll to user message (IMPORTANT)
-  
-chat.scrollTop = chat.scrollHeight;
+  // SCROLL TO USER MESSAGE (ChatGPT style)
+  setTimeout(() => {
+    chat.scrollTop = chat.scrollHeight;
+  }, 100);
 
-},100);
-
-  // Typing dots show
+  // TYPING DOTS SHOW
   chat.innerHTML += `
-    <div id="typing" class="typing">
-      <span></span><span></span><span></span>
-    </div>`;
+  <div id="typing" class="typing">
+    <span></span><span></span><span></span>
+  </div>`;
+
+  chat.scrollTop = chat.scrollHeight;
 
   try {
-
-    const res = await fetch(API_URL,{
-      method:"POST",
-      headers:{ "Content-Type":"application/json"},
-      body: JSON.stringify({message:msg})
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: msg })
     });
 
     const data = await res.json();
 
-    // remove typing
+    // REMOVE TYPING
     document.getElementById("typing").remove();
 
-    // BOT MESSAGE
+    // BOT MESSAGE ADD
     chat.innerHTML += `
       <div class="bot-msg">
-        <b>${msg}</b><br><br>
-        ${data.reply}
-        <br><br>
-        <a href="store.html" class="buy-btn">View Products</a>
-      </div>
-    `;
-    /* Scroll to BOT message (ChatGPT style) */
-setTimeout(() => {
-  const allBots = document.querySelectorAll(".bot-msg");
-const lastBot = allBots[allBots.length - 1];
+      ${data.reply}
+      <br><br>
+      <a href="store.html" class="buy-btn">View Products</a>
+      </div>`;
 
-chat.scrollTop = chat.scrollHeight;   // ⭐ ADD THIS
-
-lastBot.scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
-}, 200);
-
-    // ⭐⭐⭐ MAIN MAGIC SCROLL ⭐⭐⭐
-    setTimeout(()=>{
+    // FINAL SCROLL (important)
+    setTimeout(() => {
       chat.scrollTop = chat.scrollHeight;
-    },200);
+    }, 100);
 
-  } catch(err){
-
-    document.getElementById("typing").remove();
-    chat.innerHTML += `<div class="bot-msg">Server error 😢</div>`;
+  } catch (error) {
+    alert("API error");
   }
 }
 function toggleMenu() {
