@@ -24,8 +24,6 @@ async function sendMessage() {
       <span></span><span></span><span></span>
     </div>`;
 
-  chat.scrollTop = chat.scrollHeight;
-
   try {
 
     const res = await fetch(API_URL,{
