@@ -50,9 +50,6 @@ ${products}
 <a href="store.html" class="buy-btn">View Products</a>
 </div>`;
 
-    chat.scrollTo({
-  top: chat.scrollHeight,
-  behavior: "smooth"
 });
 
   } catch(err){
