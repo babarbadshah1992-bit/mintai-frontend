@@ -2,53 +2,59 @@ const API_URL = "https://mintai-backend.vercel.app/api/chat";
 
 async function sendMessage() {
 
-  let input = document.getElementById("userInput");
-  let chat = document.getElementById("chatBox");
-
+  const input = document.getElementById("userInput");
+  const chat = document.getElementById("chatBox");
   let msg = input.value.trim();
-  if (msg === "") return;
+  if(msg === "") return;
 
   // USER MESSAGE
   chat.innerHTML += `<div class="user-msg">${msg}</div>`;
-  input.value="";
+  input.value = "";
 
-  // typing dots
+  // Scroll to user message (IMPORTANT)
+  setTimeout(()=>{
+    chat.scrollTop = chat.scrollHeight;
+  },100);
+
+  // Typing dots show
   chat.innerHTML += `
     <div id="typing" class="typing">
       <span></span><span></span><span></span>
-    </div>
-  `;
+    </div>`;
 
-  // 🔥 NO AUTO SCROLL TO BOTTOM NOW
+  chat.scrollTop = chat.scrollHeight;
 
   try {
-    const res = await fetch(API_URL, {
+
+    const res = await fetch(API_URL,{
       method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ message: msg })
+      headers:{ "Content-Type":"application/json"},
+      body: JSON.stringify({message:msg})
     });
 
     const data = await res.json();
 
+    // remove typing
     document.getElementById("typing").remove();
 
-    let products = getProductLink(data.reply);
-
+    // BOT MESSAGE
     chat.innerHTML += `
       <div class="bot-msg">
+        <b>${msg}</b><br><br>
         ${data.reply}
-        <br><br>
-        🌿 Recommended Products:<br><br>
-        ${products}
         <br><br>
         <a href="store.html" class="buy-btn">View Products</a>
       </div>
     `;
 
-  } catch (err) {
+    // ⭐⭐⭐ MAIN MAGIC SCROLL ⭐⭐⭐
+    setTimeout(()=>{
+      chat.scrollTop = chat.scrollHeight;
+    },200);
+
+  } catch(err){
 
     document.getElementById("typing").remove();
-
     chat.innerHTML += `<div class="bot-msg">Server error 😢</div>`;
   }
 }
