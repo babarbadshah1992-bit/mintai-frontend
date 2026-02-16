@@ -48,6 +48,12 @@ async function sendMessage() {
         <a href="store.html" class="buy-btn">View Products</a>
       </div>
     `;
+    /* Scroll to BOT message (ChatGPT style) */
+setTimeout(() => {
+  const allBots = document.querySelectorAll(".bot-msg");
+  const lastBot = allBots[allBots.length - 1];
+  lastBot.scrollIntoView({ behavior: "smooth", block: "start" });
+}, 200);
 
     // ⭐⭐⭐ MAIN MAGIC SCROLL ⭐⭐⭐
     setTimeout(()=>{
