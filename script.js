@@ -11,7 +11,10 @@ async function sendMessage() {
   // user message
   chat.innerHTML += `<div class="user-msg">${msg}</div>`;
   input.value="";
-  chat.scrollTop = chat.scrollHeight;
+  chat.scrollTo({
+  top: chat.scrollHeight,
+  behavior: "smooth"
+});
 
   // typing dots
   chat.innerHTML += `
@@ -47,7 +50,10 @@ ${products}
 <a href="store.html" class="buy-btn">View Products</a>
 </div>`;
 
-    chat.scrollTop = chat.scrollHeight;
+    chat.scrollTo({
+  top: chat.scrollHeight,
+  behavior: "smooth"
+});
 
   } catch(err){
     document.getElementById("typing").remove();
