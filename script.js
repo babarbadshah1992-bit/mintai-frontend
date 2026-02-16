@@ -12,9 +12,11 @@ async function sendMessage() {
   input.value = "";
 
   // Scroll to user message (IMPORTANT)
-  setTimeout(()=>{
-    chat.scrollTop = chat.scrollHeight;
-  },100);
+ setTimeout(()=>{
+  const allUsers = document.querySelectorAll(".user-msg");
+  const lastUser = allUsers[allUsers.length - 1];
+  lastUser.scrollIntoView({ behavior: "smooth", block: "start" });
+},100);
 
   // Typing dots show
   chat.innerHTML += `
