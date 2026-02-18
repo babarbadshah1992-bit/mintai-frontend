@@ -321,10 +321,12 @@ margin:10px 0;
     display:flex;
     flex-direction:column;
 }
-/* CHAT SCROLL FIX */
-.chat-box{
-  height:420px;
+/* FINAL CHAT GPT SCROLL FIX */
+#chatBox{
+  height:65vh;
+  max-height:520px;
   overflow-y:auto;
+  padding:20px;
   scroll-behavior:smooth;
 }
 /* CHATGPT STYLE SCROLL FIX */
