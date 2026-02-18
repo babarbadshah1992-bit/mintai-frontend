@@ -10,20 +10,20 @@ async function sendMessage() {
 
   // USER MESSAGE ADD
   chat.innerHTML += `<div class="user-msg">${msg}</div>`;
-  input.value = "";
-
-  // SCROLL TO USER MESSAGE (ChatGPT style)
   setTimeout(() => {
-    chat.scrollTop = chat.scrollHeight;
-  }, 100);
+  const lastMessage = chat.lastElementChild;
+  lastMessage.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}, 100);
+  input.value = "";
 
   // TYPING DOTS SHOW
   chat.innerHTML += `
   <div id="typing" class="typing">
     <span></span><span></span><span></span>
   </div>`;
-
-  chat.scrollTop = chat.scrollHeight;
 
   try {
     const res = await fetch(API_URL, {
@@ -41,14 +41,16 @@ async function sendMessage() {
     chat.innerHTML += `
       <div class="bot-msg">
       ${data.reply}
+      setTimeout(() => {
+  const lastMessage = chat.lastElementChild;
+  lastMessage.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}, 100);
       <br><br>
       <a href="store.html" class="buy-btn">View Products</a>
       </div>`;
-
-    // FINAL SCROLL (important)
-    setTimeout(() => {
-      chat.scrollTop = chat.scrollHeight;
-    }, 100);
 
   } catch (error) {
     alert("API error");
