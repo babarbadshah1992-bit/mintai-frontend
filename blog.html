@@ -4,14 +4,7 @@
     <title>MintAI Auto Blog</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<!-- SPLASH SCREEN -->
-<div id="splash">
-  <h1 class="logo-animate">
-    <span>M</span><span>i</span><span>n</span><span>t</span><span>A</span><span>I</span>
-  </h1>
-</div>
 <h1 class="blog-title">MintAI Health Blog</h1>
 <p class="blog-subtitle">AI generated health & beauty tips</p>
 
@@ -47,14 +40,6 @@ async function generateBlog(){
     blogDiv.innerHTML =
         `<h2>${topic.toUpperCase()}</h2>
         <p>${data.reply.replace(/\n/g,"<br>")}</p>`;
-}
-</script>
-<script src="script.js"></script>
-
-window.onload = () =>{
-  setTimeout(()=>{
-     document.getElementById("splash").style.display="none";
-  },2500);
 }
 <script src="script.js"></script>
 </body>
