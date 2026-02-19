@@ -10,7 +10,9 @@
 <body>
 <!-- SPLASH SCREEN -->
 <div id="splash">
-<h1>MintAI</h1>
+  <h1 class="logo-animate">
+    <span>M</span><span>i</span><span>n</span><span>t</span><span>A</span><span>I</span>
+  </h1>
 </div>
 <header>
 
@@ -61,15 +63,18 @@
 <script src="script.js"></script>
 
 <script>
-window.onload = () =>{
-  setTimeout(()=>{
-     document.getElementById("splash").style.display="none";
-  },2500);
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").style.opacity = "0";
+    setTimeout(()=>{
+      document.getElementById("splash").style.display = "none";
+    },500);
+  },2000);
 }
 </script>
+  
+</body>
+</html>
 
-</body>
-</html>
-</body>
-</html>
+
 
