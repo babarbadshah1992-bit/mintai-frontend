@@ -8,6 +8,10 @@
 </head>
 
 <body>
+<!-- SPLASH SCREEN -->
+<div id="splash">
+<h1>MintAI</h1>
+</div>
 <header>
 
   <div class="logo">Mint<span>AI</span></div>
@@ -54,7 +58,18 @@
 
 </div>
   
-<script src="script.js"></script> 
+<script src="script.js"></script>
+
+<script>
+window.onload = () =>{
+  setTimeout(()=>{
+     document.getElementById("splash").style.display="none";
+  },2500);
+}
+</script>
+
+</body>
+</html>
 </body>
 </html>
 
