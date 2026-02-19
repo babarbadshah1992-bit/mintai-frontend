@@ -358,3 +358,29 @@ margin:10px 0;
   }
 
 }
+.blog-input-box {
+    text-align: center;
+    margin-top: 25px;
+}
+
+#blogTopic {
+    padding: 12px;
+    width: 260px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.blog-input-box button {
+    padding: 12px 18px;
+    background: #2a6f97;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.blog-input-box button:hover {
+    background: #1f4f6d;
+}
