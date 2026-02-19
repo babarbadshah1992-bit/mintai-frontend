@@ -89,3 +89,36 @@ function getProductLink(text){
 
   return "Top Ayurvedic Wellness Products";
 }
+window.generateBlog = async function () {
+
+    const topic = document.getElementById("blogTopic").value.trim();
+    const blogDiv = document.getElementById("blogContent");
+
+    if (topic === "") {
+        alert("Please enter a topic");
+        return;
+    }
+
+    blogDiv.innerHTML = "Generating blog...";
+
+    try {
+
+        const res = await fetch("https://mintai-backend.vercel.app/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message: `Write a detailed SEO blog on ${topic}`
+            })
+        });
+
+        const data = await res.json();
+
+        blogDiv.innerHTML = `
+            <h2>${topic.toUpperCase()}</h2>
+            <p>${data.reply.replace(/\n/g, "<br>")}</p>
+        `;
+
+    } catch (error) {
+        blogDiv.innerHTML = "Error generating blog.";
+    }
+};
