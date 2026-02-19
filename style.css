@@ -384,3 +384,55 @@ margin:10px 0;
 .blog-input-box button:hover {
     background: #1f4f6d;
 }
+/* BLOG PAGE DESIGN */
+
+.blog-title{
+    text-align:center;
+    margin-top:40px;
+    font-size:38px;
+    color:#2a6f97;
+}
+
+.blog-subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:25px;
+}
+
+.blog-box{
+    max-width:750px;
+    margin:40px auto;
+    padding:35px;
+    background:#ffffff;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    line-height:1.8;
+    font-size:18px;
+}
+
+.blog-box h2{
+    color:#2a6f97;
+    margin-top:30px;
+}
+
+.blog-box p{
+    color:#333;
+}
+
+.blog-box br{
+    margin-bottom:8px;
+}
+
+/* Input box center fix */
+.blog-input-box{
+    text-align:center;
+    margin-top:30px;
+}
+
+/* Mobile friendly */
+@media(max-width:768px){
+    .blog-box{
+        margin:20px;
+        padding:20px;
+    }
+}
