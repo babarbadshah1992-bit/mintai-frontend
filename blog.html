@@ -15,32 +15,38 @@
 
 <div id="blogContent" class="blog-box"></div>
 
-<!-- ⚠️ SCRIPT ALWAYS AT END -->
-<script>
-const API_URL = "https://mintai-backend.vercel.app/api/chat";
+window.generateBlog = async function() {
 
-async function generateBlog(){
-    const topic = document.getElementById("blogTopic").value;
-    const blogDiv = document.getElementById("blogContent");
+  const topic = document.getElementById("blogTopic").value.trim();
+  const blogDiv = document.getElementById("blogContent");
 
-    if(topic==="") return;
+  if(topic === "") {
+    alert("Please enter a topic");
+    return;
+  }
 
-    blogDiv.innerHTML = "Generating blog... ⏳";
+  blogDiv.innerHTML = "Generating blog... ⏳";
 
-    const res = await fetch(API_URL,{
-        method:"POST",
-        headers:{ "Content-Type":"application/json"},
-        body: JSON.stringify({
-            message:`Write a detailed SEO blog on ${topic}. Include headings, tips and conclusion.`
-        })
+  try {
+    const res = await fetch("https://mintai-backend.vercel.app/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: `Write a detailed SEO blog on ${topic}`
+      })
     });
 
     const data = await res.json();
 
-    blogDiv.innerHTML =
-        `<h2>${topic.toUpperCase()}</h2>
-        <p>${data.reply.replace(/\n/g,"<br>")}</p>`;
-}
+    blogDiv.innerHTML = `
+      <h2>${topic.toUpperCase()}</h2>
+      <p>${data.reply.replace(/\n/g, "<br>")}</p>
+    `;
+
+  } catch (error) {
+    blogDiv.innerHTML = "Error generating blog.";
+  }
+};
 <script src="./script.js"></script>
 </body>
 </html>
