@@ -29,14 +29,28 @@ async function sendMessage() {
 
     // REMOVE TYPING
     document.getElementById("typing").remove();
+    
+// CLEAN REPLY (remove any code from response)
+let cleanReply = data.reply
+  .replace(/setTimeout[\s\S]*/g, "")   // remove scroll code
+  .replace(/const lastMessage[\s\S]*/g, "")
+  .replace(/chat\.lastElementChild[\s\S]*/g, "");
 
-    // BOT MESSAGE ADD
-    chat.innerHTML += `
-      <div class="bot-msg">
-      ${data.reply}
-      <br><br>
-      <a href="store.html" class="buy-btn">View Products</a>
-      </div>`;
+// BOT MESSAGE ADD (SAFE)
+chat.innerHTML += `
+<div class="bot-msg">
+${cleanReply}
+<br><br>
+<a href="store.html" class="buy-btn">View Products</a>
+</div>
+`;
+  setTimeout(() => {
+ const lastMessage = chat.lastElementChild;
+ lastMessage.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+ });
+},100);  
 // SCROLL AFTER BOT MESSAGE
 setTimeout(() => {
  const lastMessage = chat.lastElementChild;
