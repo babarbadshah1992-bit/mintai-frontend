@@ -10,15 +10,8 @@ async function sendMessage() {
 
   // USER MESSAGE ADD
   chat.innerHTML += `<div class="user-msg">${msg}</div>`;
-  setTimeout(() => {
-  const lastMessage = chat.lastElementChild;
-  lastMessage.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}, 100);
   input.value = "";
-
+  
   // TYPING DOTS SHOW
   chat.innerHTML += `
   <div id="typing" class="typing">
