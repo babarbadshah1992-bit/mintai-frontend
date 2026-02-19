@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MintAI Auto Blog</title>
-  <link rel="stylesheet" href="style.css">
+    <title>MintAI Auto Blog</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1 class="blog-title">MintAI Health Blog</h1>
 <p class="blog-subtitle">AI generated health & beauty tips</p>
-<div class="blog-input-box">
-<input type="text" id="blogTopic" placeholder="Enter topic like hair fall, skin care">
-<button onclick="generateBlog()">Generate Blog</button>
-</div>
-<<div id="blogContent" class="blog-box"></div>
 
+<div class="blog-input-box">
+    <input type="text" id="blogTopic" placeholder="Enter topic like hair fall, skin care">
+    <button onclick="generateBlog()">Generate Blog</button>
+</div>
+
+<div id="blogContent" class="blog-box"></div>
+
+<!-- ⚠️ SCRIPT ALWAYS AT END -->
 <script>
 const API_URL = "https://mintai-backend.vercel.app/api/chat";
 
 async function generateBlog(){
-  const topic = document.getElementById("blogTopic").value;
-  const blogDiv = document.getElementById("blogContent");
+    const topic = document.getElementById("blogTopic").value;
+    const blogDiv = document.getElementById("blogContent");
 
-  if(topic==="") return;
+    if(topic==="") return;
 
-  blogDiv.innerHTML = "Generating blog... ⏳";
+    blogDiv.innerHTML = "Generating blog... ⏳";
 
-  const res = await fetch(API_URL,{
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({
-      message:`Write a detailed SEO blog on ${topic}. Include headings, tips and conclusion.`
-    })
-  });
+    const res = await fetch(API_URL,{
+        method:"POST",
+        headers:{ "Content-Type":"application/json"},
+        body: JSON.stringify({
+            message:`Write a detailed SEO blog on ${topic}. Include headings, tips and conclusion.`
+        })
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  blogDiv.innerHTML = `
-    <h2>${topic.toUpperCase()}</h2>
-    <p>${data.reply.replace(/\n/g,"<br>")}</p>
-  `;
+    blogDiv.innerHTML =
+        `<h2>${topic.toUpperCase()}</h2>
+        <p>${data.reply.replace(/\n/g,"<br>")}</p>`;
 }
 </script>
 
