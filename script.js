@@ -41,17 +41,17 @@ async function sendMessage() {
     chat.innerHTML += `
       <div class="bot-msg">
       ${data.reply}
-      setTimeout(() => {
-  const lastMessage = chat.lastElementChild;
-  lastMessage.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}, 100);
       <br><br>
       <a href="store.html" class="buy-btn">View Products</a>
       </div>`;
-
+// SCROLL AFTER BOT MESSAGE
+setTimeout(() => {
+ const lastMessage = chat.lastElementChild;
+ lastMessage.scrollIntoView({
+   behavior: "smooth",
+   block: "start"
+ });
+}, 100);
   } catch (error) {
     alert("API error");
   }
