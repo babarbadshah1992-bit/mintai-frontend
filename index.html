@@ -96,16 +96,21 @@ window.onload = () =>{
      document.getElementById("splash").style.display="none";
   },2500);
 }
+<script src="script.js"></script>
+
 <script>
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", function () {
+  const splash = document.getElementById("splash");
+  if (!splash) return;
+
   setTimeout(() => {
-    document.getElementById("splash").style.opacity = "0";
-    setTimeout(()=>{
-      document.getElementById("splash").style.display = "none";
-    },500);
-  },2000);
-}
+    splash.style.opacity = "0";
+    setTimeout(() => {
+      splash.style.display = "none";
+    }, 700);
+  }, 2200);
+});
 </script>
-    
+
 </body>
 </html>
